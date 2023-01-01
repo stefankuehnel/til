@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profile">
+  <div class="box">
+    <img src="/profile-image.png" />
+  </div>
+</div>
+
+<h1>Stefan Kühnel: TIL</h1>
+<p>
+  A collection of concise write-ups on small things I learn day to day across a
+  variety of languages and technologies.
+</p>
+
+<hr />
+
+<p>
+  <strong>Browse by topic:</strong>
+  {% set subsections = get_section(path="_index.md") | get(key="subsections") | sort %}
+  {% for subsection in subsections %}
+
+  {% set section = get_section(path=subsection) %}
+
+  <span>
+    <a href="{{ section.path }}">{{ section.title | lower }}</a>
+    <span>{{ section.pages | length }}</span>
+  </span>
+
+  {%- if not loop.last -%}
+  <span>&centerdot;</span>
+  {%- endif -%}
+  {% endfor %}
+</p>
+
+<hr />
+
+<p>Browse through the collection of TILs.</p>
+
+{% set subsections = get_section(path="_index.md") | get(key="subsections") | sort %}
+{% for subsection in subsections %}
+{% set section = get_section(path=subsection) %}
+<h3>{{ section.title }}</h3>
+<ul>
+  {% for page in section.pages %}
+  <li>
+    <strong>
+      <a href="{{ page.path }}">{{ page.title }}</a>
+    </strong>
+  </li>
+  {% endfor %}
+</ul>
+{% endfor %}
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>
+  <a href="{{ get_section(path=section.ancestors | first) | get(key='path') }}">
+    &larr; Home
+  </a>
+</p>
+
+<h1>{{ section.title }}</h1>
+
+<p>{{ section.description }}</p>
+
+<ul>
+  {% for page in section.pages %}
+  <li>
+    <strong>
+      <a href="{{ page.path | safe }}">{{ page.title }}</a>
+    </strong>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock content %}

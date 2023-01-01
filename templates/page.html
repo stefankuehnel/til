@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <p>
+    <a href="{{ get_section(path=page.ancestors | first) | get(key='path') }}">
+      &larr; Home
+    </a>
+  </p>
+
+  <h1>{{ page.title }}</h1>
+
+  <p>
+    {% set section = get_section(path=page.ancestors | last) %}
+    <span>
+      <a href="{{ section.path }}">{{ section.title }}</a>
+    </span>
+    <span>&middot;</span>
+    <span>
+      {{ page.date | date(format="%b %e, %Y", timezone="Europe/Berlin") }}
+    </span>
+    <span>&middot;</span>
+    <span>{{ page.reading_time }} min read</span>
+  </p>
+
+  {{ page.content | safe }}
+{% endblock content %}

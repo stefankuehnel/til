@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Stefan Kühnel: TIL</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/highlight.css" />
+    {% block rss %}
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="RSS"
+      href="/atom.xml"
+    />
+    {% endblock %}
+  </head>
+  <body>
+    {% block content %} {% endblock %}
+    <hr />
+    <footer>
+      <p>
+        <span>
+          Page generated:
+          <span>
+            <script>
+              document.write(
+                new Date(document.lastModified).toLocaleDateString("en-US", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                }) + "."
+              );
+            </script>
+          </span>
+        </span>
+        <span>
+          Content provided under
+          <a
+            href="https://creativecommons.org/licenses/by-nc/3.0/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            CC BY-NC 3.0
+          </a>.
+        </span>
+      </p>
+      <p>
+        Copyright &copy;
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        Stefan K&uuml;hnel, All rights reserved.
+      </p>
+    </footer>
+  </body>
+</html>

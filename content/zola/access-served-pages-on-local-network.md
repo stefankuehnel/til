@@ -18,3 +18,7 @@ $ zola serve --interface 0.0.0.0
 However, in order to have everything work correctly, you might also have to
 alter the `base-url` flag to your local ip or set it to `/` to use server-base
 relative paths.
+
+## Bibliography
+
+Prouillet, V. (2017). _CLI usage_. Zola. [https://www.getzola.org/documentation/getting-started/cli-usage/#serve](https://www.getzola.org/documentation/getting-started/cli-usage/#serve)

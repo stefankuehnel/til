@@ -8,7 +8,7 @@ Process substitution is a feature in `bash` that allows the output of a command 
 For example, consider the following command:
 
 ```
-gpg --encrypt --hidden-recipient-file <(curl -sL https://example.com/hidden-recipient.gpg) --output message.gpg message.txt
+$ gpg --encrypt --hidden-recipient-file <(curl -sL https://example.com/hidden-recipient.gpg) --output message.gpg message.txt
 ```
 
 This command utilizes the `gpg` command to encrypt the file `message.txt`, using the recipient's public key that is downloaded via `curl` from the specified URL, and uses `bash` process substitution with `<()` to pass the contents of the downloaded file to the `--hidden-recipient-file` option of `gpg`.

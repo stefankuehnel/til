@@ -1,6 +1,6 @@
 # Today I Learned (TIL)
 
-[![Netlify](../../actions/workflows/netlify.yml/badge.svg)](../../actions/workflows/netlify.yml)
+[![webgo](../../actions/workflows/webgo.yml/badge.svg)](../../actions/workflows/webgo.yml)
 
 A collection of concise write-ups on small things I learn day to day across a variety of languages and technologies.
 
@@ -34,7 +34,7 @@ The following technologies, tools and platforms were used during development.
 - **SSG**: [Zola](https://www.getzola.org)
 - **Styling**: [SCSS](https://sass-lang.com)
 - **CI/CD**: [GitHub Actions](https://github.com/actions)
-- **Deployment**: [Netlify](https://netlify.com)
+- **Deployment**: [webgo](https://webgo.de)
 
 ## 👷‍ Error Found?
 

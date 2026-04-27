@@ -1,0 +1,94 @@
+version: "3"
+
+dotenv:
+  - ".env"
+
+tasks:
+  default:
+    desc: "Run default task"
+    cmds:
+      - task: "build"
+
+  init:
+    desc: "Initialize project"
+    cmds:
+      - task: "env:init"
+
+  env:init:
+    desc: "Initialize environment variables"
+    cmds:
+      - |
+        cat <<EOF > .env
+        FTP_HOST="{{ .FTP_HOST }}"
+        FTP_USER="{{ .FTP_USER }}"
+        FTP_PASSWORD="{{ .FTP_PASSWORD }}"
+        EOF
+    requires:
+      vars:
+        - "FTP_HOST"
+        - "FTP_USER"
+        - "FTP_PASSWORD"
+
+  dev:
+    desc: "Run development server"
+    cmds:
+      - task: "zola:dev"
+
+  zola:dev:
+    desc: "Run development server with Zola"
+    cmds:
+      - "zola serve"
+
+  build:
+    desc: "Build project"
+    cmds:
+      - task: "zola:build"
+
+  zola:build:
+    desc: "Build project with Zola"
+    deps:
+      - task: "clean"
+    cmds:
+      - "zola build"
+
+  deploy:
+    desc: "Deploy project"
+    cmds:
+      - task: "ftps:deploy"
+
+  ftps:deploy:
+    desc: "Deploy project with FTPS"
+    deps:
+      - task: "build"
+    cmds:
+      - >-
+        rclone sync public/ :ftp:/ \
+          --ftp-host=${FTP_HOST} \
+          --ftp-user=${FTP_USER} \
+          --ftp-pass=$(rclone obscure ${FTP_PASSWORD}) \
+          --ftp-explicit-tls=true
+    requires:
+      vars:
+        - FTP_HOST
+        - FTP_USER
+        - FTP_PASSWORD
+
+  format:
+    desc: "Format project"
+    cmds:
+      - task: "nix:format"
+
+  nix:format:
+    desc: "Format project with Nix"
+    cmds:
+      - "nix fmt"
+
+  clean:
+    desc: "Clean project artifacts"
+    cmds:
+      - task: "zola:clean"
+
+  zola:clean:
+    desc: "Clean 'public/' directory"
+    cmds:
+      - "rm --recursive --force public"
